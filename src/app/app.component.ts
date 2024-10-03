@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavigationSidebarComponent } from './navigation-sidebar/navigation-sidebar.component';
+import { NavigationSidebarComponent } from './components/navigation-sidebar/navigation-sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',

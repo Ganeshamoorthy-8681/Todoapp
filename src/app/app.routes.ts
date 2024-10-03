@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +13,6 @@ export const routes: Routes = [
   },
   {
     path: "tasks",
-    loadComponent: () => import("./task/task.component").then(m => m.TaskComponent)
+    loadComponent: () => import("./components/task/task.component").then(m => m.TaskComponent)
   }
 ];

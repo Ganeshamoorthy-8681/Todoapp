@@ -1,0 +1,31 @@
+.task-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-data {
+    width: 90%;
+  }
+
+  &--row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .item-width {
+    width: 25%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .key {
+    color: #898989;
+  }
+}
+
+.mat-mdc-card-content:last-child,
+.mat-mdc-card-content:first-child {
+  padding-bottom: 8px !important;
+}

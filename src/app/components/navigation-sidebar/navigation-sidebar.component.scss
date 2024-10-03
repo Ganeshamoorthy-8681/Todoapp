@@ -1,7 +1,9 @@
+@use "../../.../../../../src/styles/custom-theme.scss" as theme;
+
 .navigation {
   &-sidebar {
     width: 220px;
-    background-color: aliceblue;
+    background-color: theme.$primary-color;
     height: calc(100vh - 64px);
   }
 

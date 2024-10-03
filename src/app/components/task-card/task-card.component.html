@@ -1,0 +1,46 @@
+<div class="task-card">
+
+  <mat-card>
+    <mat-card-content>
+
+      <div class="task-card-content">
+
+        <div class="task-card-content-data">
+
+          <div class="task-card-content--row">
+            <div class="item-width">
+              <span class="key"> Task Name </span>
+              <span>{{data.title}}</span>
+            </div>
+
+            <div class="item-width">
+              <span class="key"> Task Description </span>
+              <span> @if (data.description) { <span [matTooltip]="data.description"> {{data.description}} </span>} @else { - }</span>
+            </div>
+
+            <div class="item-width">
+              <span class="key"> Created </span>
+              <span> {{data.createdDate | date}}</span>
+            </div>
+          </div>
+
+          <div class="task-card-content--row">
+            <div class="item-width"> <span class="key"> Status </span> <mat-chip class="tertiary"> {{data.status}}</mat-chip> </div>
+            <div class="item-width"> <span class="key"> Due date </span> {{data.dueDate | date}}</div>
+            <div class="item-width"> <span class="key"> Last Updated </span> <span>@if (data.updatedOn !== 0 ) {
+                {{data.updatedOn | date}}}@else { - }</span></div>
+          </div>
+
+        </div>
+
+        <div class="task-card-content-action">
+          <button (click)="handleEditButtonEvent($event)" mat-icon-button><mat-icon>edit</mat-icon></button>
+          <button (click)="handleDeleteButtonEvent($event)" mat-icon-button><mat-icon>delete</mat-icon></button>
+        </div>
+
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

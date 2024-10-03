@@ -1,0 +1,149 @@
+<div class="dashboard">
+
+  <div class="dashboard-widgets">
+
+    <mat-card class="task-status-count-card">
+
+      <mat-card-header class="card-header">
+        <mat-card-title>Task Report</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (this.taskCountByStatus) {
+        <div class="count-card completed">
+          <div class="status-icon">
+            <mat-icon>task_alt</mat-icon>
+          </div>
+          <div class="content">
+            <span class="key"> COMPLETED </span>
+            <span class="value">{{this.taskCountByStatus.completedStatusCount}}</span>
+          </div>
+
+        </div>
+        <div class="count-card in-progress">
+          <div class="status-icon">
+            <mat-icon>sync</mat-icon>
+          </div>
+          <div class="content">
+            <span class="key">IN PROGRESS </span>
+            <span class="value">{{this.taskCountByStatus.inProgressStatusCount}}</span>
+          </div>
+
+        </div>
+        <div class="count-card not-ready">
+          <div class="status-icon">
+            <mat-icon>block</mat-icon>
+          </div>
+          <div class="content">
+            <span class="key"> NOT READY </span>
+            <span class="value">{{this.taskCountByStatus.notReadyStatusCount}}</span>
+          </div>
+
+        </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="recently-updated">
+
+      <mat-card-header class="card-header">
+        <mat-card-title>
+          Recently Updated
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <table mat-table [dataSource]="recentlyUpdatedTableDataSource">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Task Name </th>
+            <td mat-cell *matCellDef="let task"> {{task.taskName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let task"> {{task.taskStatus}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedAt">
+            <th mat-header-cell *matHeaderCellDef> Updated At </th>
+            <td mat-cell *matCellDef="let task">
+              @if (task.updatedOn) { {{ task.updatedOn | date}} } @else { - }
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="recentlyUpdatedTableDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: recentlyUpdatedTableDisplayedColumns;"></tr>
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[5,10]" [length]="recentlyUpdatedTableTotalRecords"
+          [pageSize]="recentlyUpdatedTablePageSize" [pageIndex]="recentlyUpdatedTablePageNumber" showFirstLastButtons
+          (page)="handleRecentlyClosedTablePagination($event)"></mat-paginator>
+      </mat-card-content>
+
+    </mat-card>
+
+  </div>
+
+
+  <mat-card class="dashboard-my-task">
+
+    <mat-card-header class="card-header">
+      <mat-card-title>My Task Today</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <!-- <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar> -->
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Task Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.taskName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.taskDescription}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.taskStatus}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+          <th mat-header-cell *matHeaderCellDef> Due Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.dueDate | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Created At </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdOn | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef> Updated At </th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.updatedOn) { {{ element.updatedOn | date}} } @else { - }
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="handleEditButtonEvent(element)" mat-icon-button><mat-icon>edit</mat-icon></button>
+            <button (click)="handleDeleteButtonEvent(element)" mat-icon-button><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+      <mat-paginator [pageSizeOptions]="[5,10,20]" [length]="totalRecords" [pageSize]="pageSize"
+        [pageIndex]="pageNumber" [showFirstLastButtons]="true" (page)="handlePaginationEvent($event)"></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+
+</div>

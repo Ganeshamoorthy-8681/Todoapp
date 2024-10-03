@@ -1,0 +1,51 @@
+<div class="task-form">
+  <form [formGroup]="taskForm">
+
+    <div>
+      <h4>Task Details</h4>
+    </div>
+    <div class="form-field">
+      <div class="form-field-label">Task Name </div>
+      <mat-form-field class="form-field-item" subscriptSizing="dynamic">
+        <mat-label>Enter the Task Name</mat-label>
+        <input type="text" formControlName="name" matInput>
+        <mat-error *ngIf="taskForm.get('name')?.hasError('required')">Task Name is Required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <div class="form-field-label">
+        Task Description
+      </div>
+      <mat-form-field class="form-field-item" subscriptSizing="dynamic">
+        <mat-label>Enter the Task Description</mat-label>
+        <input type="text" formControlName="description" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <div class="form-field-label">Select the Task Status</div>
+      <mat-chip-listbox aria-label="select a shirt size" formControlName="status" class="form-field-item">
+        <mat-chip-option value="IN_PROGRESS"> In Progress </mat-chip-option>
+        <mat-chip-option value="COMPLETED"> Completed </mat-chip-option>
+        <mat-chip-option value="NOT_READY"> Not Ready </mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+
+
+    <div class="form-field">
+      <div class="form-field-label">Select the Task Due Date</div>
+      <mat-form-field class="form-field-item" subscriptSizing="dynamic">
+        <input formControlName="dueDate" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="form-footer">
+    <button mat-flat-button [disabled]="taskForm.invalid" (click)="handleSubmitEvent()">Save</button>
+    <button mat-stroked-button (click)="handleCancelEvent()">Cancel</button>
+  </div>
+</div>
