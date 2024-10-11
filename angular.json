@@ -29,11 +29,26 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets"
               }
             ],
             "styles": [
-              "src/styles/custom-theme.scss",
-              "src/styles.scss"            ],
+              "src/styles.scss",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              {
+                "input": "src/styles/custom-theme.scss",
+                "bundleName": "indigo",
+                "inject": true
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
