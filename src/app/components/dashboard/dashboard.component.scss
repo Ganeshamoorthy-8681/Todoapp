@@ -1,111 +1,25 @@
-.dashboard {
-  border: 1px solid grey;
-  padding: 16px;
+@use 'icon';
 
-  .card-header {
-    margin-bottom: 16px;
-  }
+
+.dashboard {
 
   &-widgets {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
+    height: 360px;
+    max-height: 360px;
+    // box-sizing: border-box;
 
     .task-status-count-card {
       width: 45%;
-      padding: 8px;
+      // padding: 8px;
 
-      .count-card {
-        height: 64px;
-        font-weight: 500;
-        border-radius: 8px;
-        padding: 4px 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-
-        .status-icon {
-          mat-icon {
-            font-size: 36px;
-            height: unset;
-            width: unset;
-          }
-        }
-
-        .content {
-          width: 75%;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          font-size: 18px;
-        }
-
-
-
-        &.completed {
-          color: #176B2A;
-          background-color: #E5FAEA;
-        }
-
-        &.in-progress {
-          color: #173A80;
-          background-color: #E5EEFF;
-        }
-
-        &.not-ready {
-          color: #626161;
-          background-color: #d3d3d3;
-        }
-      }
     }
 
     .recently-updated {
       width: 50%;
-      overflow: auto;
     }
   }
-
-  // &-task-status-count {
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-between;
-  //   margin-bottom: 16px;
-  //   height: 72px;
-  //   padding: 16px;
-
-
-  //   .count-card {
-  //     height: 64px;
-  //     width: 25%;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     color: #fff;
-
-  //     &.completed {
-  //       background-color: #64C6A2;
-  //     }
-
-  //     &.not-ready {
-  //       background-color: #3c414ab3;
-  //     }
-
-  //     &.in-progress {
-  //       background-color: #88b408b3;
-  //     }
-
-  //   }
-  // }
-
-  &-my-task {
-    // width: 60%;
-  }
-
-  // &-todays-task {
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 4px;
-  // }
 
 }

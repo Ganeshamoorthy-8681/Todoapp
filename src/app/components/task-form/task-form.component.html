@@ -1,9 +1,7 @@
 <div class="task-form">
   <form [formGroup]="taskForm">
+    <h4>Task Details</h4>
 
-    <div>
-      <h4>Task Details</h4>
-    </div>
     <div class="form-field">
       <div class="form-field-label">Task Name </div>
       <mat-form-field class="form-field-item" subscriptSizing="dynamic">
@@ -30,6 +28,7 @@
         <mat-chip-option value="COMPLETED"> Completed </mat-chip-option>
         <mat-chip-option value="NOT_READY"> Not Ready </mat-chip-option>
       </mat-chip-listbox>
+      <mat-error *ngIf="taskForm.get('status')?.hasError('required')">Task Status is Required</mat-error>
     </div>
 
 
@@ -45,7 +44,8 @@
   </form>
 
   <div class="form-footer">
-    <button mat-flat-button [disabled]="taskForm.invalid" (click)="handleSubmitEvent()">Save</button>
+    <button mat-raised-button color="primary" [disabled]="taskForm.invalid"
+      (click)="handleSubmitEvent()">Submit</button>
     <button mat-stroked-button (click)="handleCancelEvent()">Cancel</button>
   </div>
 </div>

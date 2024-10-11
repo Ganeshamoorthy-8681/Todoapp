@@ -1,0 +1,13 @@
+@use 'mixins/task-mixins' as mixin;
+
+.completed {
+  @include mixin.task-status('task-completed-text-color', 'task-completed-bg-color');
+}
+
+.in-progress {
+  @include mixin.task-status('task-in-progress-text-color', 'task-in-progress-bg-color');
+}
+
+.not-ready {
+  @include mixin.task-status('task-not-ready-text-color', 'task-not-ready-bg-color');
+}

@@ -1,0 +1,47 @@
+@use 'task-status';
+
+.recently-updated-task-card {
+
+  &__header {
+    margin-bottom: 16px;
+    height: 48px;
+    box-sizing: border-box;
+  }
+
+  .no-result-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    margin: 0 auto;
+    width: 260px;
+    height: calc(100% - 48px);
+
+    .task-logo {
+      width: 124px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__content {
+
+    &__table {
+      height: calc(360px - 144px);
+      overflow: auto;
+    }
+
+  }
+
+  .progress-spinner {
+    margin: 96px auto;
+  }
+
+  .progress-bar {
+    opacity: 0;
+
+    &.loading {
+      opacity: 1;
+    }
+  }
+}

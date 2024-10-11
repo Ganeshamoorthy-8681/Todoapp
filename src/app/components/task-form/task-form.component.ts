@@ -5,12 +5,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TaskModel } from '../../model/response/task.model';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { TaskFormModel, TaskFormOutputEventModel } from './task-form.model';
 import { FormFooterActions } from '../../enum/form-footer-actions.model';
+import { TaskStatus } from '../../enum/task-status.model';
 
 @Component({
   selector: 'app-task-form',
@@ -27,19 +28,13 @@ export class TaskFormComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor (
+    private dialogRef: MatDialogRef<TaskFormComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: TaskModel
   ) { }
 
   ngOnInit(): void {
     this.createTaskForm();
-    // this.taskForm = new FormGroup<TaskFormModel>({
-    //   name: new FormControl<string>(, Validators.required),
-    //   description: new FormControl(),
-    //   status: new FormControl(this.data.taskStatus, Validators.required),
-    //   dueDate: new FormControl(this.formatDateToMMDDYYYY(this.data?.dueDate), [Validators.required])
-    // });
-
     this.taskForm.valueChanges.subscribe(console.log);
   }
 
@@ -48,13 +43,13 @@ export class TaskFormComponent implements OnInit {
     this.taskForm = this.formBuilder.group({
       name: [this.data?.taskName, Validators.required],
       description: [''],
-      status: [this.data?.taskStatus, Validators.required],
+      status: [this.data?.taskStatus ?? TaskStatus.NOT_READY, Validators.required],
       dueDate: [this.formatDateToMMDDYYYY(this.data?.dueDate), Validators.required]
     });
   }
 
   formatDateToMMDDYYYY(dateNum: number): Date {
-    const date = new Date(dateNum);
+    const date = new Date(dateNum ?? Date.now());
     return date;
   }
 
@@ -67,12 +62,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   handleCancelEvent(): void {
-    const event: TaskFormOutputEventModel = {
-      eventType: FormFooterActions.CANCEL,
-      data: null
-    };
-    this.event.emit(event);
+    this.dialogRef.close();
   }
-
 
 }

@@ -2,41 +2,52 @@
 
 // USING M3_Components
 
-$theme: mat.define-theme((color: (theme-type: light,
-        primary: mat.$violet-palette,
-        tertiary: mat.$chartreuse-palette,
+// $theme: mat.define-theme((color: (theme-type: light,
+//         primary: mat.$violet-palette,
+//         tertiary: mat.$chartreuse-palette,
 
-      ),
-      typography: (brand-family: 'Comic Sans',
-        bold-weight: 900),
-      density: (scale: -1)));
-
-$primary-color: mat.get-theme-color($theme, primary, 90);
-
-@include mat.core();
-
-html {
-  @include mat.all-component-themes($theme);
-  @include mat.all-component-typographies($theme);
-}
-
-//USING M2 NEED TO WORK
-
-// $primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500);
-// $accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-// $warn: mat.m2-define-palette(mat.$m2-red-palette);
-
-// $theme: mat.m2-define-light-theme((color: (primary: $primary,
-//         accent: $accent,
 //       ),
-//       typography: mat.m2-define-typography-config(),
-//       density: 0,
-//     ));
+//       typography: (brand-family: 'Comic Sans',
+//         bold-weight: 900),
+//       density: (scale: -1)));
 
-// $primary-color : mat.m2-get-color-from-palette($primary, 500);
-
+// $primary-color: mat.get-theme-color($theme, primary, 90);
 
 // @include mat.core();
-// @include mat.all-component-themes($theme);
 
-// @include mat.all-component-typographies($theme);
+// html {
+//   @include mat.all-component-themes($theme);
+//   @include mat.all-component-typographies($theme);
+// }
+
+//USING M2 Components
+
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette, 400, 300, 500);
+$accent: mat.m2-define-palette(mat.$m2-purple-palette, A200, A100, A400);
+$warn: mat.m2-define-palette(mat.$m2-red-palette,400);
+
+$theme: mat.m2-define-light-theme((color: (primary: $primary,
+        accent: $accent,
+      ),
+      density: 0,
+    ));
+
+$primary-color : mat.m2-get-color-from-palette($primary, 500);
+
+.custom-theme {
+  --task-not-ready-text-color: #626161;
+  --border-color: #cfc1c1;
+  --task-not-ready-bg-color: #d3d3d3;
+  --task-in-progress-text-color: #173A80;
+  --task-in-progress-bg-color: #E5EEFF;
+  --task-completed-text-color: #176B2A;
+  --task-completed-bg-color: #E5FAEA;
+  --primary-color: #3f51b5;
+  --white: #fcfcfc;
+  --accent-color-50: #f3e5f5;
+  --error-color-400: #ef5350;
+  --icon-color: #0000008a;
+
+  @include mat.all-component-colors($theme);
+  @include mat.all-component-typographies($theme);
+}

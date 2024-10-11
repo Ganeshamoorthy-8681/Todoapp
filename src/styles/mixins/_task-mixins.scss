@@ -1,0 +1,9 @@
+@mixin task-status($text-color, $bg-color) {
+  color: var(--#{$text-color}) !important;
+  background-color: var(--#{$bg-color}) !important;
+
+  .task-status-text {
+    font-weight: 500;
+    color: var(--#{$text-color});
+  }
+}
