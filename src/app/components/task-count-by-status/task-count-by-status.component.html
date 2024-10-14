@@ -5,6 +5,10 @@
   </mat-card-header>
   <mat-card-content class="task-count-by-status-card__content">
 
+    @if (errorObject) {
+    <app-alert [data]="errorObject"></app-alert>
+    }
+
     <div class="task-count-by-status-card__content-item completed">
       <mat-icon class="task-count-by-status-card__content-item__icon">task_alt</mat-icon>
       <div class="task-count-by-status-card__content-item__data">

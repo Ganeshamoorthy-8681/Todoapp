@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormFooterActions } from '../../enum/form-footer-actions.model';
 import { TaskStatus } from '../../enum/task-status.model';
 import { TASK_STATUS_MAPPER } from '../../model/mapper/task-status-mapper';
@@ -19,11 +19,16 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { TaskFormOutputEventModel, TaskFormModel } from '../task-form/task-form.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { TaskService } from '../../service/task.service';
+import { TaskService } from '../../service/task-service/task.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { TaskListComponentModel } from './model/task-list-component.model';
+import { AbstractCreateTask } from '../../abstracts/Abstract-create-task';
+import { AlertService } from '../../service/alert-service/alert.service';
+import { AlertComponentModel } from '../alert/model/alert-model';
+import { AlertComponent } from '../alert/alert.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-task-list',
@@ -42,36 +47,41 @@ import { TaskListComponentModel } from './model/task-list-component.model';
     MatButtonModule,
     MatIconModule,
     DatePipe,
-    MatChipsModule
+    MatChipsModule,
+    AlertComponent,
+    MatProgressSpinnerModule
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
 })
-export class TaskListComponent implements OnInit, OnDestroy {
+export class TaskListComponent extends AbstractCreateTask implements OnInit, OnDestroy {
 
   @Input() data: TaskListComponentModel;
 
-  private dialogRef: MatDialogRef<TaskFormComponent | DialogComponent>;
-
+  protected dialogRef: MatDialogRef<TaskFormComponent | DialogComponent>;
+  private taskStatus: string;
+  isLoading = true;
   displayedColumns = ["name", "description", "status", "dueDate", "updatedAt", "createdAt", "actions"];
   pageSize: number = 10;
   pageNumber: number = 0;
   totalRecords: number;
   dataSource: TaskModel[] = [];
-  isTodaysTaskListLoading: boolean;
+  isTaskListLoading: boolean;
+
 
   private deleteTaskSubscription: Subscription;
   private updateTaskSubscription: Subscription;
-  private createTaskSubscription: Subscription;
   private todaysTaskListSubscription: Subscription;
   private refreshDataSubscription: Subscription | undefined;
-  private dialogComponentOutputEventSubscription: Subscription;
-  taskStatus: any;
+  protected dialogComponentOutputEventSubscription: Subscription;
 
   constructor (
-    private taskService: TaskService,
-    private dialog: MatDialog
-  ) { }
+    protected taskService: TaskService,
+    protected dialog: MatDialog,
+    protected alertService: AlertService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.data?.isTodaysTask ? this.getTodaysTaskList() : this.getTaskList();
@@ -87,35 +97,38 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.destroyRefreshDataSubscription();
   }
 
-  getTodaysTaskList(): void {
-    this.isTodaysTaskListLoading = true;
+  private getTodaysTaskList(): void {
+    this.isTaskListLoading = true;
     this.todaysTaskListSubscription = this.taskService.getTodaysTaskList(this.pageSize, this.pageNumber)
       .subscribe({
-        next: (response: HttpResponse<TaskModel[]>) => this.handleTodaysTaskListResponse(response),
-        error: (error) => { console.log(error); }
+        next: (response: HttpResponse<TaskModel[]>) => this.handleTaskListResponse(response),
+        error: (error) => { this.errorObject = this.alertService.handleError(error); }
       });
   }
 
-  listenDataRefreshSubject(): void {
+  private listenDataRefreshSubject(): void {
     this.refreshDataSubscription = this.data.$refreshDataSubject?.subscribe((isRefreshData) => {
-      isRefreshData ? this.getTodaysTaskList() : this.getTaskList();
+      if (isRefreshData) {
+        this.data.isTodaysTask ? this.getTodaysTaskList() : this.getTaskList();
+      }
     });
   }
 
-  getTaskList(): void {
-    this.isTodaysTaskListLoading = true;
+  private getTaskList(): void {
+    this.isTaskListLoading = true;
     this.todaysTaskListSubscription = this.taskService.getTaskList(this.pageSize, this.pageNumber, this.taskStatus)
       .subscribe({
-        next: (response: HttpResponse<TaskModel[]>) => this.handleTodaysTaskListResponse(response),
-        error: (error) => { console.log(error); }
+        next: (response: HttpResponse<TaskModel[]>) => this.handleTaskListResponse(response),
+        error: (error) => { this.errorObject = this.alertService.handleError(error); }
       });
   }
 
-  handleTodaysTaskListResponse(response: HttpResponse<TaskModel[]>): void {
+  private handleTaskListResponse(response: HttpResponse<TaskModel[]>): void {
     this.totalRecords = PaginationUtil.getTotalRecords(response.headers);
-    const todaysTaskList = response.body as TaskModel[];
-    this.dataSource = todaysTaskList;
-    this.isTodaysTaskListLoading = false;
+    const taskList = response.body as TaskModel[];
+    this.dataSource = taskList;
+    this.isTaskListLoading = false;
+    this.isLoading = false;
   }
 
 
@@ -155,7 +168,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
         } else {
           this.data.isTodaysTask ? this.getTodaysTaskList() : this.getTaskList();
         }
-      }
+      },
+      error: (error) => { this.errorObject = this.alertService.handleError(error); }
     });
   }
 
@@ -178,7 +192,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.handleTaskUpdateResponse();
-        }
+        },
+        error: (error) => { this.errorObject = this.alertService.handleError(error); }
       });
   }
 
@@ -188,27 +203,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.data.isTodaysTask ? this.getTodaysTaskList() : this.getTaskList();
   }
 
-
-  handleCreateTaskEvent() {
-    this.dialogRef = this.dialog.open(TaskFormComponent, { width: '500px' });
-    this.listenTaskCreateFormSubmit();
-  }
-
-  listenTaskCreateFormSubmit(): void {
-    this.destroyDialogOutputEventsSubscription();
-    this.dialogComponentOutputEventSubscription = (this.dialogRef.componentInstance as TaskFormComponent).event.subscribe((event) => {
-      this.createTask(event.data as FormGroup<TaskFormModel>);
-    });
-  }
-
-  createTask(taskForm: FormGroup<TaskFormModel>) {
-    this.destroyCreateTaskSubscription();
-    this.createTaskSubscription = this.taskService.createTask(taskForm).subscribe({
-      next: () => {
-        this.handleCreateTaskSuccessResponse();
-      }
-    });
-  }
 
   handleCreateTaskSuccessResponse(): void {
     this.dialogRef?.close();
@@ -228,10 +222,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   getTaskDisplayName(taskStatus: TaskStatus): string {
     return TASK_STATUS_MAPPER[taskStatus].displayName;
-  }
-
-  destroyCreateTaskSubscription(): void {
-    this.createTaskSubscription?.unsubscribe();
   }
 
   destroyUpdateTaskSubscription(): void {

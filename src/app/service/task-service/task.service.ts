@@ -1,17 +1,17 @@
 import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TodoAppApiEndpoints } from '../constants/api-constants';
-import { HttpRequestHeader } from '../enum/headers.model';
-import { PaginationUtil } from '../util/Paginationutil';
-import { TaskModel } from '../model/response/task.model';
+import { TodoAppApiEndpoints } from '../../constants/api-constants';
+import { HttpRequestHeader } from '../../enum/headers.model';
+import { PaginationUtil } from '../../util/Paginationutil';
+import { TaskModel } from '../../model/response/task.model';
 import { Observable } from 'rxjs';
-import { TaskCountByStatusModel } from '../model/response/task-count-by-status.model';
-import { TaskCreateRequestModel } from '../model/request/task-create-request.model';
-import { TaskFormModel } from '../components/task-form/task-form.model';
-import { TaskUpdateRequestModel } from '../model/request/task-update-request.model';
+import { TaskCountByStatusModel } from '../../model/response/task-count-by-status.model';
+import { TaskCreateRequestModel } from '../../model/request/task-create-request.model';
+import { TaskFormModel } from '../../components/task-form/task-form.model';
+import { TaskUpdateRequestModel } from '../../model/request/task-update-request.model';
 import { FormGroup } from '@angular/forms';
-import { UrlUtil } from '../util/UrlUtil';
-import { TaskStatus } from '../enum/task-status.model';
+import { UrlUtil } from '../../util/UrlUtil';
+import { TaskStatus } from '../../enum/task-status.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +29,6 @@ export class TaskService {
   constructor (private http: HttpClient) { }
 
 
-  // getTaskList(pageSize)
-
-
   getTodaysTaskList(pageSize: number, pageNumber: number): Observable<HttpResponse<TaskModel[]>> {
     const url = TodoAppApiEndpoints.TASK_LIST;
     const contentRequestRange = PaginationUtil.getRequestRange(pageNumber, pageSize);
@@ -39,6 +36,7 @@ export class TaskService {
     return this.http.get<TaskModel[]>(url, {
       headers: headers,
       observe: "response",
+      params: { isTodayDue: true }
     });
   }
 
