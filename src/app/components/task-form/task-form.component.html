@@ -24,9 +24,9 @@
     <div class="form-field">
       <div class="form-field-label">Select the Task Status</div>
       <mat-chip-listbox aria-label="select a shirt size" formControlName="status" class="form-field-item">
+        <mat-chip-option value="NOT_READY"> Not Ready </mat-chip-option>
         <mat-chip-option value="IN_PROGRESS"> In Progress </mat-chip-option>
         <mat-chip-option value="COMPLETED"> Completed </mat-chip-option>
-        <mat-chip-option value="NOT_READY"> Not Ready </mat-chip-option>
       </mat-chip-listbox>
       <mat-error *ngIf="taskForm.get('status')?.hasError('required')">Task Status is Required</mat-error>
     </div>

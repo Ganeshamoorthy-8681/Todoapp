@@ -8,8 +8,13 @@
   <mat-card-content>
 
     <div class="recently-updated-task-card__content">
+
+      @if (errorObject) {
+      <app-alert [data]="errorObject"></app-alert>
+      }
+
       @if (isLoading) {
-      <mat-progress-spinner class="progress-spinner" mode="indeterminate" [diameter]="60"></mat-progress-spinner>
+      <mat-progress-spinner class="progress-spinner" mode="indeterminate" [diameter]="50"></mat-progress-spinner>
       } @else {
 
       <div class="progress-bar"

@@ -1,11 +1,17 @@
 <mat-card class="task-list-card">
   <mat-card-header class="task-list-card__header">
-    <mat-card-title>My Task Today </mat-card-title>
+    @if (data.title) {
+    <mat-card-title>{{data.title}} </mat-card-title>
+    }
     <button (click)="handleCreateTaskEvent()" mat-button color="primary" class="create-btn"
       *ngIf="dataSource.length"><mat-icon>add_box</mat-icon>Create Task</button>
   </mat-card-header>
 
   <mat-card-content>
+
+    @if (errorObject) {
+    <app-alert [data]="errorObject"></app-alert>
+    }
 
     <mat-form-field *ngIf="data?.isFilterRequired">
       <mat-label>Status</mat-label>
@@ -17,7 +23,11 @@
       </mat-select>
     </mat-form-field>
 
-    <div class="progress-bar" [ngClass]="{'loading': dataSource.length > 0 && isTodaysTaskListLoading}">
+    @if (isLoading) {
+    <mat-progress-spinner class="progress-spinner" color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+    }
+
+    <div class="progress-bar" [ngClass]="{'loading': dataSource.length > 0 && isTaskListLoading}">
       <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
     </div>
 
@@ -80,7 +90,7 @@
     </table>
     <mat-paginator [pageSizeOptions]="[5,10,20]" [length]="totalRecords" [pageSize]="pageSize" [pageIndex]="pageNumber"
       [showFirstLastButtons]="true" (page)="handlePaginationEvent($event)"></mat-paginator>
-    } @else {
+    } @else if(!isLoading){
 
     <div class="no-result-found mat-elevation-z1">
       <h2>No Tasks Available</h2>

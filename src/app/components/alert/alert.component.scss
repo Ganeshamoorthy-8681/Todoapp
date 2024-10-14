@@ -1,0 +1,27 @@
+.alert {
+  padding: 8px 16px;
+  box-sizing: border-box;
+  background-color: #ffd2d2;
+  border-radius: 4px;
+  color: #ff5d5d;
+  border: 1px solid #ff5d5d;
+  margin-bottom: 12px;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}

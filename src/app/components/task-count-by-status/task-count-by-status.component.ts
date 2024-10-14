@@ -1,15 +1,18 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { TaskService } from '../../service/task.service';
+import { TaskService } from '../../service/task-service/task.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { TaskCountByStatusModel } from '../../model/response/task-count-by-status.model';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AlertService } from '../../service/alert-service/alert.service';
+import { AlertComponentModel } from '../alert/model/alert-model';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-task-count-by-status',
   standalone: true,
-  imports: [MatIconModule, MatCardModule, MatProgressSpinnerModule],
+  imports: [MatIconModule, MatCardModule, MatProgressSpinnerModule, AlertComponent],
   templateUrl: './task-count-by-status.component.html',
   styleUrl: './task-count-by-status.component.scss'
 })
@@ -20,6 +23,7 @@ export class TaskCountByStatusComponent implements OnInit, OnDestroy {
   @Input({ required: false }) className: string;
 
   taskCountByStatus: TaskCountByStatusModel | null;
+  errorObject: AlertComponentModel;
   isLoading: boolean;
 
   private taskCountByStatusSubscription: Subscription;
@@ -28,6 +32,7 @@ export class TaskCountByStatusComponent implements OnInit, OnDestroy {
 
   constructor (
     private taskService: TaskService,
+    private alertService: AlertService
   ) { };
 
   ngOnInit(): void {
@@ -45,7 +50,7 @@ export class TaskCountByStatusComponent implements OnInit, OnDestroy {
     this.taskCountByStatusSubscription = this.taskService.getTaskCountByStatus()
       .subscribe({
         next: (taskCount) => this.handleTaskCountByStatus(taskCount),
-        error: (error) => console.log(error),
+        error: (err) => { this.errorObject = this.alertService.handleError(err); },
         complete: () => this.isLoading = false
 
       });

@@ -6,7 +6,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { TaskModel } from '../../model/response/task.model';
-import { TaskService } from '../../service/task.service';
+import { TaskService } from '../../service/task-service/task.service';
 import { PaginationUtil } from '../../util/Paginationutil';
 import { HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, delay, Subscription } from 'rxjs';
@@ -20,6 +20,9 @@ import { TaskStatus } from '../../enum/task-status.model';
 import { TASK_STATUS_MAPPER } from '../../model/mapper/task-status-mapper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AlertComponentModel } from '../alert/model/alert-model';
+import { AlertService } from '../../service/alert-service/alert.service';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-recently-updated-task',
@@ -33,7 +36,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgClass,
     MatProgressBarModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AlertComponent
   ],
   templateUrl: './recently-updated-task.component.html',
   styleUrl: './recently-updated-task.component.scss'
@@ -45,6 +49,7 @@ export class RecentlyUpdatedTaskComponent implements OnInit, OnDestroy {
 
   private dialogRef: MatDialogRef<TaskFormComponent, DialogComponent>;
   isLoading = true;
+  errorObject: AlertComponentModel;
   recentlyUpdatedTableDisplayedColumns = ["name", "status", "updatedAt"];
   recentlyUpdatedTablePageSize: number = 5;
   recentlyUpdatedTablePageNumber: number = 0;
@@ -59,7 +64,8 @@ export class RecentlyUpdatedTaskComponent implements OnInit, OnDestroy {
 
   constructor (
     private taskService: TaskService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private alertService: AlertService
   ) { };
 
   ngOnInit(): void {
@@ -78,6 +84,7 @@ export class RecentlyUpdatedTaskComponent implements OnInit, OnDestroy {
     this.recentlyUpdatedTaskSubscription = this.taskService.getRecentlyUpdatedTaskList(this.recentlyUpdatedTablePageSize, this.recentlyUpdatedTablePageNumber)
       .subscribe({
         next: (response) => this.handleRecentlyUpdatedTaskListResponse(response as HttpResponse<TaskModel[]>),
+        error: (error) => { this.errorObject = this.alertService.handleError(error); },
         complete: (() => this.isLoading = false)
       });
   }

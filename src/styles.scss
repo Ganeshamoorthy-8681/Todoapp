@@ -6,3 +6,19 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.page-inner-content {
+  margin: 16px 32px;
+  overflow: auto;
+  height: calc(100vh - 168px);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  margin-bottom: 24px !important;
+  box-shadow: 0 1px 4px #0000001a,
+    0 1px 4px #0000001a;
+  background-color: white !important;
+}
