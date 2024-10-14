@@ -3,8 +3,6 @@
     @if (data.title) {
     <mat-card-title>{{data.title}} </mat-card-title>
     }
-    <button (click)="handleCreateTaskEvent()" mat-button color="primary" class="create-btn"
-      *ngIf="dataSource.length"><mat-icon>add_box</mat-icon>Create Task</button>
   </mat-card-header>
 
   <mat-card-content>
@@ -24,7 +22,8 @@
     </mat-form-field>
 
     @if (isLoading) {
-    <mat-progress-spinner class="progress-spinner" color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+    <mat-progress-spinner class="progress-spinner" color="primary" mode="indeterminate"
+      diameter="50"></mat-progress-spinner>
     }
 
     <div class="progress-bar" [ngClass]="{'loading': dataSource.length > 0 && isTaskListLoading}">
