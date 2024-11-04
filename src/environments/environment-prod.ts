@@ -1,3 +1,3 @@
 export const environment = {
-  apiEndpoint: "https://prominent-catha-ownprojects-9d0f3420.koyeb.app/"
+  apiEndpoint: "https://todoapp-backend-34tl.onrender.com"
 };
