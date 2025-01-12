@@ -22,9 +22,9 @@
 
 //USING M2 Components
 
-$primary: mat.m2-define-palette(mat.$m2-indigo-palette, 400, 300, 500);
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500, 300, 500);
 $accent: mat.m2-define-palette(mat.$m2-purple-palette, A200, A100, A400);
-$warn: mat.m2-define-palette(mat.$m2-red-palette,400);
+$warn: mat.m2-define-palette(mat.$m2-red-palette, 400);
 
 $theme: mat.m2-define-light-theme((color: (primary: $primary,
         accent: $accent,
@@ -46,7 +46,35 @@ $primary-color : mat.m2-get-color-from-palette($primary, 500);
   --white: #fcfcfc;
   --accent-color-50: #f3e5f5;
   --error-color-400: #ef5350;
-  --icon-color: #0000008a;
+  --icon-color: #9ca3af;
+
+  //New Component colors;
+
+  --high-priority-bg-color: #FFEDD5;
+  --low-priority-bg-color: #D1FAE5;
+  --medium-priority-bg-color: #DBEAFE;
+
+  --high-priority-color: #9A3412;
+  --low-priority-color: #065F46;
+  --medium-priority-color: #1E40AF;
+  --all-task-status-color: #4f46e5;
+  --all-task-status-bg-color: #E0E7FF;
+  --in-progress-task-status-color: #d97706;
+  --in-progress-task-status-bg-color: #FEF3C7;
+  --overdue-task-status-color: #dc2626;
+  --overdue-task-status-bg-color: #fee2e2;
+  --completed-task-status-color: #065F46;
+  --completed-task-status-bg-color: #d1fae5;
+  --work-task-status-color: #3B82F6;
+  --education-task-status-color: #8B5CF6;
+  --personal-task-status-color: #10B981;
+  --border-color: #e5e7eb;
+  --background-skeleton-gradient: rgba(255, 255, 255, 0.6);
+  --background-default: #ededed;
+  --content-bg-color: #F9FAFB;
+  --page-background-color: #F5F5F5;
+  --upcoming-task-status-bg-color: #d3d3d3;
+  --upcoming-task-status-color: #626161;
 
   @include mat.all-component-colors($theme);
   @include mat.all-component-typographies($theme);

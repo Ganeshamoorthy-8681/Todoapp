@@ -1,0 +1,78 @@
+@use 'mixins/skeleton-loader-mixin' as skeleton-loader;
+
+.task-count-by-status {
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+}
+
+.task-count {
+  width: 240px;
+  height: 64px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0px 16px;
+  border: 1px solid var(--border-color);
+
+  .status-count-icon {
+    border-radius: 6px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .content {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .key {
+      color: #4b5563;
+    }
+
+    .value {
+      font-weight: 500;
+      font-size: large;
+    }
+
+    .skeleton-loader {
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include skeleton-loader.skeleton-loader-animation();
+    }
+  }
+
+
+  .all-task-status-count {
+    background-color: var(--all-task-status-bg-color);
+    color: var(--all-task-status-color);
+  }
+
+  .in-progress-task-status-count {
+    background-color: var(--in-progress-task-status-bg-color);
+    color: var(--in-progress-task-status-color);
+  }
+
+  .completed-task-status-count {
+    background-color: var(--completed-task-status-bg-color);
+    color: var(--completed-task-status-color);
+  }
+
+  .overdue-task-status-count {
+    background-color: var(--overdue-task-status-bg-color);
+    color: var(--overdue-task-status-color);
+  }
+
+  .upcoming-task-status-count {
+    background-color: var(--upcoming-task-status-bg-color);
+    color: var(--upcoming-task-status-color)
+  }
+}

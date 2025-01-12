@@ -1,0 +1,11 @@
+.page-container {
+  display: flex;
+  margin-top: 64px;
+
+  &__content {
+    flex: 1;
+    background-color: var(--page-background-color);
+    overflow: auto;
+    height: calc(100vh - 64px);
+  }
+}

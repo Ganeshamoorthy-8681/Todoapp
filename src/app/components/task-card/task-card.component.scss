@@ -1,0 +1,66 @@
+@use 'task-priority';
+@use "icon";
+@use 'task-status';
+
+.task-card {
+  max-width: 500px;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  
+  &.mat-mdc-card {
+    box-shadow: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  .card-header {
+    display: flex;
+    margin-bottom: 0.5rem;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 500;
+      margin-right: 8px;
+    }
+  }
+
+  .card-content {
+    font-size: small;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .due-date__container {
+      display: flex;
+      align-items: center;
+
+      .due_date {
+        font-size: small;
+      }
+    }
+  }
+
+  .overdue {
+    color: var(--error-color-400);
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)
+  }
+
+}
+
+.multiline-ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}

@@ -1,0 +1,21 @@
+<div class="header">
+  <div class="title__container">
+    <span class="title"> {{data.title}} </span>
+    @if (data.description) {
+    <span>{{data.description}}</span>
+    }
+  </div>
+  @if (data.isActionVisible) {
+  <div class="actions">
+    <button mat-stroked-button color="primary">
+      <mat-icon>filter_list</mat-icon>
+      Filter
+    </button>
+    <button mat-raised-button color="primary" (click)="handleCreateTaskEvent()">
+      <mat-icon>add</mat-icon>
+      Add Task
+    </button>
+  </div>
+  }
+
+</div>

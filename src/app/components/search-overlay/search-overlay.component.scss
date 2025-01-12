@@ -1,0 +1,46 @@
+.search-bar-overlay {
+  background: var(--white);
+  width: 520px;
+  max-height: 520px;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  .search-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1rem;
+    row-gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 2px solid var(--border-color);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .key-value {
+      display: flex;
+      gap: 8px;
+      white-space: nowrap;
+
+      .key {
+        font-size: small;
+        color: #4b5563;
+      }
+
+      .value {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 112px;
+      }
+    }
+  }
+}
+
+.overdue {
+  color: var(--error-color-400);
+}

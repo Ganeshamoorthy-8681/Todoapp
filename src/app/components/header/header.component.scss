@@ -1,7 +1,29 @@
+@use 'icon';
+
 .app-header {
   position: fixed;
   inset: 0;
   z-index: 100;
   width: 100%;
   height: 64px;
+  box-sizing: border-box;
+
+  &__toolbar {
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 16px;
+    border: 1px solid var(--border-color);
+  }
+
+  &__logo {
+    .logo {
+      color: var(--all-task-status-color);
+    }
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }

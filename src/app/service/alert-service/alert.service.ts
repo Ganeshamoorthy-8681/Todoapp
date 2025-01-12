@@ -1,21 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { AlertComponentModel } from '../../components/alert/model/alert-model';
-
+import { inject, Injectable } from '@angular/core';
+import {
+  MatSnackBar,
+} from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
-
-  constructor () { }
-
-
-  handleError(error: HttpErrorResponse): AlertComponentModel {
-    const errorObject: AlertComponentModel = {
-      title: error.name,
-      message: error.message
-    };
-    return errorObject;
+  private _snackBar = inject(MatSnackBar);
+  openToaster(message: string) {
+    this._snackBar.open(message, "close", { duration: 3000, horizontalPosition: 'right', verticalPosition: 'top' });
   }
-
 }

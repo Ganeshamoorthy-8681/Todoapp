@@ -4,5 +4,4 @@ export enum HttpRequestHeader {
 
 export enum HttpResponseHeader {
   CONTENT_RANGE = "range"
-
 }

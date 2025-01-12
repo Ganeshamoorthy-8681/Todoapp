@@ -1,9 +1,18 @@
 @mixin task-status($text-color, $bg-color) {
-  color: var(--#{$text-color}) !important;
-  background-color: var(--#{$bg-color}) !important;
+
+  padding: 0.25rem 0.5rem;
+  border-radius: 16px;
+
+  @include getColorAndBgColor($text-color, $bg-color);
 
   .task-status-text {
     font-weight: 500;
     color: var(--#{$text-color});
   }
+}
+
+
+@mixin getColorAndBgColor($text-color, $bg-color) {
+  color: var(--#{$text-color}) !important;
+  background-color: var(--#{$bg-color}) !important;
 }

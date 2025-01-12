@@ -1,0 +1,28 @@
+@use 'mixins/task-mixins' as mixin;
+
+.high {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  @include mixin.getColorAndBgColor('high-priority-color', 'high-priority-bg-color');
+}
+
+.medium {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  @include mixin.getColorAndBgColor('medium-priority-color', 'medium-priority-bg-color');
+}
+
+.low {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  @include mixin.getColorAndBgColor('low-priority-color', 'low-priority-bg-color');
+}

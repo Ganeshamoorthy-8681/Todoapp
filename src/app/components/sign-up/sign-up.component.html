@@ -1,0 +1,69 @@
+<div class="sign-up-page__container">
+
+  <div class="sign-up-page">
+    @if (isLoading) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      }
+    <div class="sign-up-page__wrapper">
+      <div class="app-logo">
+        <mat-icon class="logo" svgIcon="app-logo"></mat-icon>
+        <span class="title"> TaskFlow</span>
+      </div>
+      <div class="content">
+        <div class="greet-text__wrapper">
+          <span class="welcome-text">Sign UP</span>
+          <div class="sign-up-text">Create a account to continue.</div>
+        </div>
+
+        <div class="google-sign-up-btn__wrapper">
+          <button class="google-sign-up-btn" type="button">
+            <img class="google-logo" src="google-logo.png" alt="">
+            Sign up with Google
+          </button>
+        </div>
+
+        <div class="line-break">
+          <hr class="line">
+          <span class="text">Or</span>
+        </div>
+
+
+        <form class="form" [formGroup]="signUpForm">
+          <div class="form-field">
+            <label for="username">Name</label>
+            <input formControlName="username" type="text" id="username" placeholder="Name">
+            <small class="error-message">{{getUsernameErrorMessage()}}</small>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input formControlName="email" type="email" id="email" placeholder="Email">
+            <small class="error-message">{{getEmailErrorMessage()}}</small>
+          </div>
+
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input autocomplete formControlName="password" [type]="isPasswordVisible? 'text':'password'" id="password"
+              placeholder="Password">
+            <mat-icon class="visibility-icon icon" (click)="handleVisibilityIconEvent()">
+              {{isPasswordVisible? 'visibility': 'visibility_off' }}
+            </mat-icon>
+            <small class="error-message">{{getPasswordErrorMessage()}}</small>
+          </div>
+
+          <button [disabled]="signUpForm.invalid" mat-raised-button color="primary" class="sign-up-btn" type="button"
+            (click)="handleSubmitEvent()">
+            Create Account
+          </button>
+        </form>
+        <div class="sign-up">
+          Already have an account ? <a routerLink="/"> Login </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

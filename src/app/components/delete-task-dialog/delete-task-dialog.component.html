@@ -1,0 +1,11 @@
+@if (isLoading) {
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+<h2 mat-dialog-title>Delete Task</h2>
+<mat-dialog-content>
+  Are you sure want to delete a task ?
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button mat-raised-button color="warn"[disabled]="isLoading" mat-dialog-close (click)="handleActionClick()">DELETE</button>
+  <button mat-stroked-button mat-dialog-close>CANCEL</button>
+</mat-dialog-actions>

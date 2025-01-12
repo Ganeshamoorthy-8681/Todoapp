@@ -1,0 +1,33 @@
+<div class="task-category-filter">
+  <div class="form-field">
+    <mat-button-toggle-group (change)="onSelectionChange($event)" class="category-options"
+      hideSingleSelectionIndicator="true" name="categorySelection" aria-label="categorySelection">
+
+      <mat-button-toggle value="ALL" checked="true" onSele>
+        <div class="category-option">
+          <mat-icon svgIcon="task-list" class="icon__small all-tasks-category"></mat-icon>
+          <span>All Tasks</span>
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle value="WORK">
+        <div class="category-option">
+          <mat-icon class="icon__small work-category">work</mat-icon>
+          <span>Work</span>
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle value="PERSONAL">
+        <div class="category-option">
+          <mat-icon class="icon__small personal-category">home</mat-icon>
+          <span>Personal</span>
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle value="EDUCATION">
+        <div class="category-option">
+          <mat-icon svgIcon="education" class="icon__small education-category"></mat-icon>
+          <span>Education</span>
+        </div>
+      </mat-button-toggle>
+
+    </mat-button-toggle-group>
+  </div>
+</div>

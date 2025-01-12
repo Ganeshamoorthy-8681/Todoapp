@@ -1,34 +1,42 @@
+@use 'icon';
+
 .navigation {
   &-sidebar {
     width: 260px;
-    background-color: #041c2c;
+    background-color: white;
     height: calc(100vh - 64px);
   }
 
   &-list {
     list-style-type: none;
     padding: 16px 16px 16px 0px;
-    margin: 0px;
+    margin: 0px 0px 0px 12px;
     box-sizing: border-box;
   }
 
   &-list-item {
-    color: #B4BBC0 !important;
     height: 48px;
     display: flex;
     align-items: center;
     gap: 16px;
     cursor: pointer;
     box-sizing: border-box;
-    padding: 12px 20px 12px 24px;
+    padding: 16px;
 
 
     &.active {
-      background-color: #2A3E4C;
+      color: var(--all-task-status-color);
+      background-color: var(--all-task-status-bg-color);
       border-radius: 24px;
-      color: var(--white) !important;
+
+      .navigation__icon {
+        color: var(--all-task-status-color);
+        background-color: var(--all-task-status-bg-color);
+      }
     }
   }
 
-
+  &__icon {
+    color: var(--icon-color);
+  }
 }

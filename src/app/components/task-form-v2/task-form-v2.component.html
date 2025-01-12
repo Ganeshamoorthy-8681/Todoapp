@@ -1,0 +1,117 @@
+<div class="task-form-container">
+  <div class="task-form">
+
+    <div class="form-header">
+      <span class="form-title">Add Task</span>
+      <button mat-button color="primary" (click)="handleGoBackEvent()">
+        <mat-icon>arrow_back</mat-icon>
+        Go Back
+      </button>
+    </div>
+    @if (isLoading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+
+    <form [formGroup]="taskForm" class="form-body">
+      <div class="form-field-row">
+        <div class="form-field">
+          <div class="form-field-label">Task Title</div>
+          <mat-form-field appearance="outline" class="form-field-item" subscriptSizing="dynamic">
+            <mat-label>Enter Task title</mat-label>
+            <input type="text" formControlName="name" matInput>
+            <mat-error *ngIf="taskForm.get('name')?.hasError('required')">Task Name is Required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <div class="form-field-label">Priority Level</div>
+          <mat-form-field appearance="outline" class="form-field-item" subscriptSizing="dynamic">
+            <mat-select formControlName="priority">
+              <mat-option value="HIGH">High Priority</mat-option>
+              <mat-option value="MEDIUM">Medium Priority </mat-option>
+              <mat-option value="LOW">Low Priority</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-field-row">
+        <div class="form-field">
+          <div class="form-field-label"> Due Date</div>
+          <mat-form-field appearance="outline" class="form-field-item" subscriptSizing="dynamic">
+            <input formControlName="dueDate" matInput [matDatepicker]="picker" placeholder="mm-dd-yyyy">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="taskForm.get('dueDate')?.hasError('matDatepickerParse')">Invalid Date Format</mat-error>
+            <mat-error *ngIf="taskForm.get('dueDate')?.hasError('pastDate')">Past Date Cannot be Selected</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <div class="form-field-label">Category</div>
+          <mat-form-field appearance="outline" class="form-field-item" subscriptSizing="dynamic">
+            <mat-select formControlName="category">
+
+              <mat-select-trigger>
+                <div class="category-option">
+                  @if (taskForm.get('category')?.value === 'EDUCATION') {
+                  <mat-icon svgIcon="education" class="icon__small education-category"></mat-icon>
+                  } @else {
+                  <mat-icon class="icon__small" [class]="getCategoryClassName()">
+                    {{getCategoryIcon()}}
+                  </mat-icon>
+                  }
+                  <span>{{ getCategoryLabel() }}</span>
+                </div>
+
+              </mat-select-trigger>
+
+              <mat-option value="WORK">
+                <mat-icon class="icon__small work-category">work</mat-icon>
+                Work
+              </mat-option>
+              <mat-option value="PERSONAL">
+                <mat-icon class="icon__small personal-category">home</mat-icon>
+                Personal
+              </mat-option>
+              <mat-option value="EDUCATION">
+                <mat-icon svgIcon="education" class="icon__small education-category"></mat-icon>
+                Education
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-field-row">
+        <div class="form-field">
+          <div class="form-field-label">Task Status</div>
+          <mat-chip-listbox aria-label="select a task status" formControlName="status" class="form-field-item">
+            <mat-chip-option value="UPCOMING">Upcoming </mat-chip-option>
+            <mat-chip-option value="IN_PROGRESS"> In Progress </mat-chip-option>
+            <mat-chip-option value="COMPLETED"> Completed </mat-chip-option>
+          </mat-chip-listbox>
+          <mat-error *ngIf="taskForm.get('status')?.hasError('required')">Task Status is Required</mat-error>
+
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="form-field-label">
+          Description
+        </div>
+        <mat-form-field appearance="outline" class="form-field-item" subscriptSizing="dynamic">
+          <mat-label>Brief Description of Task</mat-label>
+          <textarea type="text" formControlName="description" matInput> </textarea>
+        </mat-form-field>
+      </div>
+
+    </form>
+
+    <div class="form-footer">
+      <button mat-raised-button color="primary" [disabled]="taskForm.invalid"
+        (click)="handleSubmitEvent()">Submit</button>
+      <button mat-stroked-button (click)="handleCancelEvent()">Cancel</button>
+    </div>
+  </div>
+
+</div>

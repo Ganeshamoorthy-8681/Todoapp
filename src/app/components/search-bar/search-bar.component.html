@@ -1,0 +1,8 @@
+<div class="search-bar" [class.focus]="isFocused" (click)="handleSearchBarClick()">
+  <mat-icon class="icon icon__small">search</mat-icon>
+  <input #searchElement type="text" placeholder="Search tasks..." [formControl]="searchFormControl">
+  @if (isFocused) {
+  <mat-icon class="icon icon__small close__icon" (click)="handleCloseIconClick($event)">close</mat-icon>
+  }
+
+</div>

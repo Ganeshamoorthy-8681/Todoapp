@@ -1,0 +1,120 @@
+<div class="task-summary__container">
+
+  <div class="task-summary">
+    <div class="task-summary__header">
+      <span class="task-summary__header__title">Task Summary</span>
+
+      <div class="task-summary__header__actions">
+        <button color="primary" mat-button (click)="handleGoBackEvent()">
+          <mat-icon>arrow_back</mat-icon>
+          BACK
+        </button>
+        <button [mat-menu-trigger-for]="menu" mat-icon-button>
+
+          <mat-icon class="icon__small">more_vert</mat-icon>
+        </button>
+      </div>
+
+
+      <mat-menu #menu>
+        <button mat-menu-item (click)="handleEditEvent()">
+          <mat-icon class="icon icon__small">edit</mat-icon>
+          EDIT
+        </button>
+        <button mat-menu-item (click)="handleDeleteEvent()">
+          <mat-icon class="icon icon__small">delete</mat-icon>
+          DELETE
+        </button>
+      </mat-menu>
+    </div>
+    <div class="task-summary__content">
+      @if (isLoading) {
+      <span class="skeleton-loader"></span>
+      } @else {
+      <h2> {{ taskSummary.taskName}}</h2>
+      }
+
+      @if (isLoading) {
+      <span class="skeleton-loader"></span>
+      } @else {
+      <div>
+        <p class="sub-title">Description</p>
+        {{taskSummary.taskDescription || "-"}}
+      </div>
+      }
+
+
+      <div class="task-summary__content__details">
+        <div class="task-summary__content__details__item">
+          <span class="key">Created On</span>
+          @if (isLoading) {
+          <span class="skeleton-loader"></span>
+          } @else {
+          <span class="value">{{taskSummary.createdOn | date}}</span>
+          }
+        </div>
+        <div class="task-summary__content__details__item">
+          <span class="key">Last Updated</span>
+          @if (isLoading) {
+          <span class="skeleton-loader"></span>
+          } @else {
+          <span class="value">
+            @if (taskSummary.updatedOn) {
+            {{taskSummary.updatedOn | date}}
+            } @else {
+            -
+            }
+          </span>
+          }
+        </div>
+        <div class="task-summary__content__details__item">
+          <span class="key">Status</span>
+          @if (isLoading) {
+          <span class="skeleton-loader"></span>
+          } @else {
+          <span class="value">
+            <span [class]="getStatusClassName()">
+              <span class="task-status-text"> {{getStatusDisplayName()}}</span>
+            </span>
+          </span>
+          }
+        </div>
+        <div class="task-summary__content__details__item">
+          <span class="key">Due Date</span>
+          @if (isLoading) {
+          <span class="skeleton-loader"></span>
+          } @else {
+          <span class="value" [class]="isTaskOverdue() ? 'overdue':   ''">{{taskSummary.dueDate | date}}</span>
+          }
+        </div>
+        <div class="task-summary__content__details__item">
+          <span class="key">Priority</span>
+          @if (isLoading) {
+          <span class="skeleton-loader"></span>
+          } @else {
+          <span class="value" [class]="getPriorityClass()">{{getDisplayName()}}</span>
+
+          <!-- <span class="value">{{taskSummary.taskPriority}}</span> -->
+          }
+        </div>
+        <div class="task-summary__content__details__item">
+          <span class="key">Category</span>
+          @if (isLoading) {
+          <span class="skeleton-loader"></span>
+          } @else {
+          <span class="value">
+            @if (taskSummary.taskCategory === 'EDUCATION') {
+            <mat-icon svgIcon="education" class="icon__small education-category"></mat-icon>
+            } @else {
+            <mat-icon class="icon__small" [class]="getCategoryClassName()">
+              {{getCategoryIcon()}}
+            </mat-icon>
+            }
+            <span> {{getCategoryDisplayName()}}</span>
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,31 @@
 <header class="app-header">
-  <mat-toolbar> TODO
+  <mat-toolbar class="app-header__toolbar">
+    <div class="app-header__logo">
+      <mat-icon class="logo" svgIcon="app-logo"></mat-icon>
+      TaskFlow
+    </div>
+
+    <app-search-bar />
+
+    <div class="account-details">
+      <button mat-icon-button [mat-menu-trigger-for]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <mat-menu #menu>
+        <div class="menu">
+          <button mat-menu-item (click)="handleSettingButtonClickEvent()">
+            <mat-icon class="icon">settings</mat-icon>
+            Settings
+          </button>
+          <button mat-menu-item (click)="handleLogoutClickEvent()">
+            <mat-icon class="icon">exit_to_app</mat-icon>
+            Log out
+          </button>
+        </div>
+
+      </mat-menu>
+    </div>
 
   </mat-toolbar>
 </header>

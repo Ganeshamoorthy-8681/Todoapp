@@ -36,8 +36,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
               "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss",
               {
                 "input": "src/styles/custom-theme.scss",
                 "bundleName": "indigo",

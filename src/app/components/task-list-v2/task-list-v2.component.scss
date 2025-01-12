@@ -1,0 +1,32 @@
+@use 'mixins/skeleton-loader-mixin' as skeleton-loader;
+
+.task-list {
+  display: grid;
+  padding: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  .skeleton-loader {
+    @include skeleton-loader.skeleton-loader-animation();
+    border: 1px solid var(--border-color);
+    width: 500px;
+    display: block;
+    height: 150px;
+    border-radius: 12px;
+  }
+}
+
+.no-result-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  margin: 0 auto;
+  width: 260px;
+
+  .task-logo {
+    width: 124px;
+    margin-bottom: 8px;
+  }
+}

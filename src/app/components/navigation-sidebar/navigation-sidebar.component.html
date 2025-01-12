@@ -1,14 +1,25 @@
 <aside class="navigation-sidebar">
 
   <ul class="navigation-list">
-    <li class="navigation-list-item" routerLink="dashboard" routerLinkActive="active">
-      <mat-icon>home</mat-icon> Dashboard
+    <li class="navigation-list-item" routerLink="all" routerLinkActive="active">
+      <mat-icon class="navigation__icon">home</mat-icon> All Tasks
     </li>
 
-    <li class="navigation-list-item" routerLink="tasks" routerLinkActive="active">
-      <mat-icon>task</mat-icon> Tasks
+    <li class="navigation-list-item" routerLink="today" routerLinkActive="active">
+      <mat-icon class="navigation__icon icon__small">calendar_today</mat-icon> Today
     </li>
-
+    <li class="navigation-list-item" routerLink="upcoming" routerLinkActive="active">
+      <mat-icon class="navigation__icon icon__small">date_range</mat-icon> Upcoming
+    </li>
+    <li class="navigation-list-item" routerLink="in-progress" routerLinkActive="active">
+      <mat-icon class="navigation__icon icon__small">timer</mat-icon> In Progress
+    </li>
+    <li class="navigation-list-item" routerLink="completed" routerLinkActive="active">
+      <mat-icon class="navigation__icon icon__small">check_circle</mat-icon>Completed
+    </li>
+    <li class="navigation-list-item" routerLink="settings" routerLinkActive="active">
+      <mat-icon class="navigation__icon icon__small">settings</mat-icon>Settings
+    </li>
   </ul>
 
 </aside>

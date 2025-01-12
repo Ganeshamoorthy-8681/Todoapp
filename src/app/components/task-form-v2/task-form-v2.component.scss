@@ -1,0 +1,77 @@
+@use 'icon';
+
+.task-form {
+  max-width: 60%;
+  margin: 16px auto;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+
+  &-container {
+    background: #F9FAFB;
+    padding: 1.5rem;
+  }
+
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+
+    .form-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #1E293B;
+    }
+  }
+
+  .form-body {
+    padding: 1.75rem;
+  }
+
+  .form-field {
+    width: 100%;
+
+    .category-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-label {
+      margin-bottom: 1rem;
+    }
+
+    &-item {
+      width: 100%;
+    }
+
+    &-row {
+      display: flex;
+      margin-bottom: 1.25em;
+      gap: 16px;
+      width: 100%;
+    }
+  }
+
+  .form-footer {
+    margin: 1.5rem;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+
+.work-category {
+  color: var(--work-task-status-color);
+}
+
+.education-category {
+  color: var(--education-task-status-color);
+}
+
+.personal-category {
+  color: var(--personal-task-status-color);
+}

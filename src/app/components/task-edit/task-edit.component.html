@@ -1,0 +1,5 @@
+@if (task) {
+<app-task-form-v2 [task]="task" (formSubmit)="handleFormSubmit($event)" [isLoading]="isLoading"></app-task-form-v2>
+} @else {
+loading...
+}

@@ -1,0 +1,100 @@
+<div class="task-count-by-status">
+  <div class="task-count">
+    <div class="task-status-count">
+      <div class="status-count-icon all-task-status-count">
+        <mat-icon class="icon__small" svgIcon="task-list"></mat-icon>
+      </div>
+    </div>
+    <div class="content">
+      <span class="key">
+        All Tasks
+      </span>
+      <span class="value">
+        @if (!isLoading) {
+        <span>{{taskCount.totalTaskCount}}</span>
+        } @else {
+        <span class="skeleton-loader"></span>
+        }
+      </span>
+    </div>
+  </div>
+
+  <div class="task-count">
+    <div class="task-status-count">
+      <div class="status-count-icon in-progress-task-status-count">
+        <mat-icon>timer</mat-icon>
+      </div>
+    </div>
+    <div class="content">
+      <span class="key">
+        In Progress Tasks
+      </span>
+      <span class="value">
+        <span class="value">
+          @if (!isLoading) {
+          <span>{{taskCount.inProgressTaskCount}}</span>
+          } @else {
+          <span class="skeleton-loader"></span>
+          }
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="task-count">
+    <div class="task-status-count">
+      <div class="status-count-icon completed-task-status-count">
+        <mat-icon>done</mat-icon>
+      </div>
+    </div>
+    <div class="content">
+      <span class="key">
+        Completed Tasks
+      </span>
+      <span class="value">
+        @if (!isLoading) {
+        <span>{{taskCount.completedTaskCount}}</span>
+        } @else {
+        <span class="skeleton-loader"></span>
+        }
+      </span>
+    </div>
+  </div>
+  <div class="task-count">
+    <div class="task-status-count">
+      <div class="status-count-icon overdue-task-status-count">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+    </div>
+    <div class="content">
+      <span class="key">
+        Overdue Tasks
+      </span>
+      <span class="value">
+        @if (!isLoading) {
+        <span>{{taskCount.overDueTaskCount}}</span>
+        } @else {
+        <span class="skeleton-loader"></span>
+        }
+      </span>
+    </div>
+  </div>
+  <div class="task-count">
+    <div class="task-status-count">
+      <div class="status-count-icon upcoming-task-status-count">
+        <mat-icon>date_range</mat-icon>
+      </div>
+    </div>
+    <div class="content">
+      <span class="key">
+       Upcoming Tasks
+      </span>
+      <span class="value">
+        @if (!isLoading) {
+        <span>{{taskCount.upComingTaskCount}}</span>
+        } @else {
+        <span class="skeleton-loader"></span>
+        }
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<mat-card class="task-card" (click)="handleTaskClickEvent()" matTooltip="Click to view details">
+
+  <div class="card-header">
+    <div>
+      <span class="title">{{task.taskName}}</span>
+      <span [class]="getStatusClassName()"> {{getStatusDisplayName()}}</span>
+    </div>
+    <span [class]="getPriorityClass()">{{getDisplayName()}}</span>
+  </div>
+
+  <mat-card-content>
+    <div class="card-content multiline-ellipsis">
+      {{task.taskDescription}}
+    </div>
+  </mat-card-content>
+
+  <div class="card-footer">
+    <div class="due-date__container">
+      <mat-icon class="icon icon__small">calendar_today</mat-icon>
+      <span class="due_date" [ngClass]="{'overdue': isTaskOverdue()}">{{task.dueDate | date}}</span>
+    </div>
+    <div class="actions">
+      <button mat-icon-button (click)="handleTaskEditEvent($event)">
+        <mat-icon class="icon icon__small" svgIcon="edit-svg"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="handleTaskDeleteEvent($event)">
+        <mat-icon class="icon icon__small">delete_outline</mat-icon>
+      </button>
+    </div>
+  </div>
+
+
+</mat-card>

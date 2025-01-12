@@ -1,0 +1,10 @@
+<div class="today-tasks">
+  <app-page-header [data]="todayTasksPageHeaderData"></app-page-header>
+  <app-category-filter (selectionChange)="handleCategoryFilterChange($event)"></app-category-filter>
+  <app-task-list-v2 [tasks]="todayTasks" [isLoading]="isLoading"></app-task-list-v2>
+  @if (this.isLoadMore) {
+  <div class="load-more-button">
+    <button mat-raised-button color="primary" (click)="handleLoadMoreEvent()">Load more</button>
+  </div>
+  }
+</div>

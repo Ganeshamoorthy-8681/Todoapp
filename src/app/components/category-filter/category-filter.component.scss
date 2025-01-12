@@ -1,0 +1,34 @@
+.task-category-filter {
+  padding: 16px;
+
+  .category-options {
+    border-radius: 12px;
+  }
+
+  .category-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mat-button-toggle-checked {
+    background-color: var(--all-task-status-bg-color) !important;
+    color: var(--all-task-status-color) !important;
+  }
+
+  .all-tasks-category {
+    color: var(--all-task-status-color);
+  }
+
+  .work-category {
+    color: var(--work-task-status-color);
+  }
+
+  .education-category {
+    color: var(--education-task-status-color);
+  }
+
+  .personal-category {
+    color: var(--personal-task-status-color);
+  }
+}

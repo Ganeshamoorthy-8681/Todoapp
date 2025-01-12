@@ -8,7 +8,7 @@ export class UrlUtil {
     let replacedUrl = url;
     const keys = Object.keys(obj);
     for (let i = 0; i < keys?.length; i++) {
-      replacedUrl = url.replace(`:${keys[i]}`, obj[keys[i]]?.toString());
+      replacedUrl = replacedUrl.replace(`:${keys[i]}`, obj[keys[i]]?.toString());
     }
     return replacedUrl;
   }

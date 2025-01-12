@@ -1,0 +1,30 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding-left: 8px;
+  box-shadow: 0 0 0 1px var(--border-color);
+  width: 520px;
+  margin: 0px 12px;
+
+  input {
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+  }
+
+  .close__icon {
+    padding: 8px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &.focus {
+    border: 2px solid var(--primary-color);
+  }
+
+}

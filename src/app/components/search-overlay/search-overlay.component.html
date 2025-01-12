@@ -1,0 +1,53 @@
+@if (isLoading) {
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<div class="search-bar-overlay">
+  @if (!taskList) {
+  <span>Start Searching...</span>
+  }
+
+  @if( taskList && taskList.length === 0) {
+  <span>No Results Found</span>
+  }
+
+  @for (task of taskList; track $index) {
+  <ng-container *ngTemplateOutlet="searchItem; context:{data:task}"></ng-container>
+  }
+
+</div>
+
+<ng-template #searchItem let-data="data">
+  <div class="search-item" matTooltip="Click to view task details." (click)="handleSearchItemClickEvent(data.id)">
+
+    <div class="key-value">
+      <span class="key">Name :</span>
+      <span class="value" [matTooltip]="data.taskName" matTooltipPosition="below">
+        <!-- <a  [routerLink]="getLinkUrl(data.id)"> -->
+        {{data.taskName}}
+        <!-- </a> -->
+      </span>
+    </div>
+    <div class="key-value">
+      <span class="key">Status :</span>
+      <span class="value">{{ getStatusDisplayName(data.taskStatus)}}</span>
+    </div>
+    <div class="key-value">
+      <span class="key">Due Date :</span>
+      <span class="value" [ngClass]="{'overdue': isTaskOverdue(data.dueDate)}">{{data.dueDate | date}}</span>
+    </div>
+    <div class="key-value">
+      <span class="key">Priority :</span>
+      <span class="value">{{ getPriorityDisplayName(data.taskPriority)}}</span>
+    </div>
+    <div class="key-value">
+      <span class="key">Category :</span>
+      <span class="value">{{getCategoryDisplayName(data.taskCategory)}}</span>
+    </div>
+    <div class="key-value">
+      <span class="key">Created :</span>
+      <span class="value">{{data.createdOn | date}}</span>
+    </div>
+
+  </div>
+</ng-template>

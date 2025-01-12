@@ -11,3 +11,7 @@
 .not-ready {
   @include mixin.task-status('task-not-ready-text-color', 'task-not-ready-bg-color');
 }
+
+.upcoming {
+  @include mixin.task-status('task-not-ready-text-color', 'task-not-ready-bg-color');
+}

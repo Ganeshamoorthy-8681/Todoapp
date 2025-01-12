@@ -1,0 +1,27 @@
+<div class="task-list">
+  @for (task of tasks; track $index) {
+  <app-task-card [task]="task"></app-task-card>
+  }
+  @if (isLoading) {
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  <div class="skeleton-loader"></div>
+  }
+</div>
+
+@if (tasks?.length === 0 && !isLoading) {
+<div class="no-result-found mat-elevation-z1">
+  <h2>No Tasks Available</h2>
+  <img class="task-logo" src="task-logo.png" alt="task_create-logo">
+  <div>
+    <button (click)="handleCreateTaskEvent()" mat-button color="primary"><mat-icon>add_box</mat-icon>Create
+      Task</button>
+  </div>
+</div>
+}

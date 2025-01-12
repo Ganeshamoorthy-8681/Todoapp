@@ -1,0 +1,11 @@
+<div class="in-progress-tasks">
+  <app-page-header [data]="completedTasksPageHeaderData"></app-page-header>
+  <app-category-filter (selectionChange)="handleCategoryFilterChange($event)"></app-category-filter>
+  <app-task-list-v2 [tasks]="completedTasks" [isLoading]="isLoading"></app-task-list-v2>
+  @if (this.isLoadMore) {
+  <div class="load-more-button">
+    <button mat-raised-button color="primary" (click)="handleLoadMoreEvent()">Load more</button>
+  </div>
+  }
+  
+</div>
