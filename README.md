@@ -41,18 +41,3 @@ This Angular UI interacts with the ToDoApp microservices through an API Gateway.
 - Manage tasks by interacting with the ToDo service through the API Gateway.\n- Use the Login Service (separate repository) for user authentication.\n
   
 ---
-
-### License
-This project is licensed under the MIT License.
-
----
-
-### Contact
-- **Email**: [your-email@example.com]\n- **GitHub**: [Your GitHub](https://github.com/your-username)
-"""
-
-file_path_angular_todo_ui = "/mnt/data/README_angular_todo_ui.md"
-with open(file_path_angular_todo_ui, "w") as file:
-    file.write(angular_todoapp_readme)
-
-file_path_angular_todo_ui
