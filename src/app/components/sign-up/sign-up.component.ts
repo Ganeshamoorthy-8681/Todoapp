@@ -53,7 +53,7 @@ export class SignUpComponent {
         this.isLoading = false;
         let data;
         try {
-          data = JSON.parse(error.error);
+          data = error.error;
         }
         finally {
           this.isLoading = false;
