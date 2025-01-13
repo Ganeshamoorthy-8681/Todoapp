@@ -10,9 +10,6 @@ This repository provides the Angular-based user interface for the microservices-
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
-- [Contact](#contact)
-
 ---
 
 ### About
