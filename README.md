@@ -1,6 +1,6 @@
 # Angular UI for ToDo Microservices Application
 
-This repository provides the Angular-based user interface for the microservices-driven ToDo application.
+This repository provides the Angular-based user interface for the microservices-driven TaskFlow application.
 
 ---
 
